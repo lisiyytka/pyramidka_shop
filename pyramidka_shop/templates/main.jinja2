@@ -8,8 +8,13 @@
       <p class="product__name">{{product.name}}</p>
       <div class="product__img"><img src="../static/img/{{product.adr}}" width="100"></div>
       <p class="product__price">Цена: {{product.price}} руб.</p>
-      <button type="button" class="product__btn_add" name="tea" value="{{product.name}}">Добавить</button>
-      <button type="button" class="product__btn_rm" name="tea" value="">Удалить</button>
+      {% if bin != None and product.name in bin.products %}
+        <button type="submit" class="product__btn_add" name="add" value="{{product.name}}" formaction="/" disabled>Добавить</button>
+        <button type="submit" class="product__btn_rm" name="remove" value="{{product.name}}" formaction="/" >Удалить</button>
+      {% else %}
+        <button type="submit" class="product__btn_add" name="add" value="{{product.name}}" formaction="/">Добавить</button>
+        <button type="submit" class="product__btn_rm" name="remove" value="{{product.name}}" formaction="/" disabled>Удалить</button>
+      {% endif %}
     </div>
     {% endfor %}
     <input type="submit" value="Заказать">

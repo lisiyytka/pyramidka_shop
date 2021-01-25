@@ -1,18 +1,36 @@
 from pyramid.view import view_config
 from pyramid.response import Response
 
+from pyramidka_shop.models.bin import *
+
 from sqlalchemy.exc import DBAPIError
 
 from .. import models
 
+users_bin = dict()
+
 
 @view_config(route_name='home', renderer='../templates/main.jinja2')
 def my_view(request):
+    user_bin = None
+    if request.params.__contains__('add') or request.params.__contains__('remove'):
+        if not users_bin.__contains__('0'):
+            users_bin['0'] = Bin(0)
+
+        user_bin = users_bin['0']
+        if request.params.__contains__('add'):
+            user_bin.add(request.params['add'])
+        elif request.params.__contains__('remove'):
+            user_bin.remove(request.params['remove'])
+
     try:
         products = request.dbsession.query(models.Product).all()
     except DBAPIError:
         return Response(db_err_msg, content_type='text/plain', status=500)
-    return {'products': products, 'project': 'pyramidka_shop'}
+
+    return {'products': products,
+            'project': 'pyramidka_shop',
+            'bin': user_bin}
 
 
 db_err_msg = """\
