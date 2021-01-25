@@ -2,7 +2,7 @@ from pyramidka_shop.all_products.all_products import *
 
 
 class Order(object):
-    def __init__(self, order_id: int, name: str, phone: str, tea_list: list):
+    def __init__(self, order_id: str, name: str, phone: str, tea_list: list):
         self.id = order_id
         self.name = name
         self.phone = phone
