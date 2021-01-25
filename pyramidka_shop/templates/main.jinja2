@@ -6,7 +6,7 @@
 {% block content %}
 <div class="product__wrapper">
   <h2>Товары</h2>
-  <form action="/result" method="POST" onsubmit="checkInputs(event)">
+  <form action="/result" method="POST">
     <div class="product__goods">
       {% for product in products %}
       <div class="product__item">
@@ -31,7 +31,7 @@
       <h2>Оформление заказа</h2>
       <p><input type="text" name="name" placeholder="Введите Ваше имя"></p>
       <p><input type="text" name="phone" placeholder="Введите Ваш номер телефона"></p>
-      <input type="submit" value="Заказать">
+      <input type="submit" value="Заказать" onclick="checkInputs(event)">
     </div>
   </form>
   <p class="product__invalid-data">Пожалуйста, введите Ваше имя и номер телефона!</p>
