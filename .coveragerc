@@ -1,0 +1,3 @@
+[run]
+source = pyramidka_shop
+omit = pyramidka_shop/test*
