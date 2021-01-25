@@ -1,0 +1,23 @@
+{% block content %}
+<div class="orders">
+    <h1>Заказы</h1>
+    <table border="1">
+      <tr>
+        <td>Номер</td>
+        <td>Имя</td>
+        <td>Телефон</td>
+        <td>Cостав</td>
+        <td>Цена</td>
+      </tr>
+      {% for record in info %}
+      <tr>
+        <td>{{ record.id }}</td>
+        <td>{{ record.name }}</td>
+        <td>{{ record.phone }}</td>
+        <td>{{ record.tea_list }}</td>
+        <td>{{ record.price }}</td>
+      </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock content %}
