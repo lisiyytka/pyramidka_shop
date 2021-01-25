@@ -8,6 +8,7 @@ import zope.sqlalchemy
 from .mymodel import MyModel  # flake8: noqa
 from .product import Product
 from .order import Order
+from .office import Office, OfficeHandler
 # run configure_mappers after defining all of the models to ensure
 # all relationships can be setup
 configure_mappers()
