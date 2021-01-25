@@ -1,5 +1,13 @@
 {% extends "index.jinja2" %}
 
+{% block js %}
+<script>
+  function PreventDefault(e) {
+    e.preventDefault();
+  }
+</script>
+{% endblock js %}
+
 {% block content %}
 <div class="product__wrapper">
   <form action="/" method="POST">
@@ -8,8 +16,8 @@
       <p class="product__name">{{product.name}}</p>
       <div class="product__img"><img src="../static/img/{{product.adr}}" width="100"></div>
       <p class="product__price">Цена: {{product.price}} руб.</p>
-      <button type="button" class="product__btn_add" name="tea" value="{{product.name}}">Добавить</button>
-      <button type="button" class="product__btn_rm" name="tea" value="">Удалить</button>
+      <button type="submit" class="product__btn_add" name="tea" value="{{product.name}}" onclick="PreventDefault(event)">Добавить</button>
+      <button type="submit" class="product__btn_rm" name="tea" value="">Удалить</button>
     </div>
     {% endfor %}
     <input type="submit" value="Заказать">
