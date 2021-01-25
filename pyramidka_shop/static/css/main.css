@@ -81,7 +81,7 @@
 .product__customer-info {
   width: 35%;
   margin: 0 auto;
-  margin-bottom: 100px;
+  margin-bottom: 30px;
 }
 
 .product__customer-info h2 {
@@ -114,10 +114,22 @@
   font-size: 0.85vw;
   margin-top: 10px;
   transition: background-color .5s ease;
+  outline: none;
 }
 
 .product__customer-info input[type="submit"]:hover {
   background-color: rgb(46, 153, 78);
+}
+
+.product__invalid-data {
+  color: white;
+  font-size: 16px;
+  display: inline-block;
+  width: 100%;
+}
+
+.product__invalid-data {
+  margin-bottom: 50px;
 }
 
 @media screen and (max-width: 1410px) {

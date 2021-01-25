@@ -6,7 +6,7 @@
 {% block content %}
 <div class="product__wrapper">
   <h2>Товары</h2>
-  <form action="/result" method="POST">
+  <form action="/result" method="POST" onsubmit="checkInputs(event)">
     <div class="product__goods">
       {% for product in products %}
       <div class="product__item">
@@ -34,7 +34,58 @@
       <input type="submit" value="Заказать">
     </div>
   </form>
+  <p class="product__invalid-data">Пожалуйста, введите Ваше имя и номер телефона!</p>
 </div>
 {% endblock content %}
 
-{% block js %}<script src="../static/js/buttonChecker.js"></script>{% endblock js %}
+{% block js %}
+<script>
+  const inputs = document.querySelectorAll('input[type="text"]');
+  const invalidDataInfo = document.getElementsByClassName("product__invalid-data")[0];
+  const customerInfoBlock = document.getElementsByClassName("product__customer-info")[0];
+  let errorRaised = false;
+
+  for (let i = 0; i < inputs.length; i++) {
+    inputs[i].addEventListener('blur', () => {
+      if (inputs[i].value == "" && !errorRaised) {
+        raiseError();
+      }
+    });
+    inputs[i].addEventListener('focus', () => {
+      if (errorRaised) {
+        concealError();
+      }
+    });
+  }
+
+  function checkInputs(e) {
+    for (let i = 0; i < inputs.length; i++) {
+      if (inputs[i].value == "") {
+        e.preventDefault();
+        raiseError();
+        break;
+      }
+    }
+  }
+
+  function raiseError() {
+    if (!errorRaised) {
+      invalidDataInfo.style.color = "rgb(226, 74, 74)";
+      invalidDataInfo.style.transition = "color .2s linear";
+      errorRaised = true;
+    } else {
+      invalidDataInfo.style.transition = "font-size .2s linear";
+      invalidDataInfo.style.fontSize = "17px";
+      setTimeout(() => {
+        invalidDataInfo.style.fontSize = "16px";
+      }, 100) 
+    }
+  }
+
+  function concealError() {
+    invalidDataInfo.style.color = "white";
+    invalidDataInfo.style.transition = "color .2s linear";
+    errorRaised = false;
+  }
+</script>
+{% endblock js %}
