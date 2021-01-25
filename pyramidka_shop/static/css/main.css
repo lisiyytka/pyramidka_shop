@@ -50,6 +50,7 @@
 
 .product__btn_add:enabled {
   background-color:rgb(56, 121, 196);
+  display: inline-block;
 }
 
 .product__btn_add:enabled:hover {
@@ -59,10 +60,12 @@
 .product__btn_add:disabled {
   background-color:rgb(124, 152, 185);
   cursor: default;
+  display: none;
 }
 
 .product__btn_rm:enabled {
   background-color: rgb(211, 78, 78);
+  display: inline-block;
 }
 
 .product__btn_rm:enabled:hover {
@@ -72,6 +75,7 @@
 .product__btn_rm:disabled {
   background-color: rgb(214, 158, 158);
   cursor: default;
+  display: none;
 }
 
 .product__customer-info {
