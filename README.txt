@@ -39,6 +39,6 @@ Getting Started
 
     env/bin/pytest
 
-- Run your project.
+- Run your project
 
     env/bin/pserve development.ini
