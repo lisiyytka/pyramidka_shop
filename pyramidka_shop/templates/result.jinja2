@@ -1,0 +1,26 @@
+{% extends "index.jinja2" %}
+
+{% block content %}
+<table>
+    <tr>
+        <td align="left">Номер заказа:</td>
+        <td align="left">{{ order.id }}</td>
+    </tr>
+    <tr>
+        <td align="left">Ваше имя:</td>
+        <td align="left">{{ order.name }}</td>
+    </tr>
+    <tr>
+        <td align="left">Ваш номер телефона:</td>
+        <td align="left">{{order.phone}}</td>
+    </tr>
+    <tr>
+        <td align="left">Состав заказа:</td>
+        <td align="left">{{ order.tea_list }}</td>
+    </tr>
+    <tr>
+        <td align="left">Сумма заказа:</td>
+        <td align="left">{{ order.price }}</td>
+    </tr>
+</table>
+{% endblock content %}
