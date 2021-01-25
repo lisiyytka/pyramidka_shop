@@ -9,11 +9,10 @@ from .. import models
 @view_config(route_name='home', renderer='../templates/main.jinja2')
 def my_view(request):
     try:
-        query = request.dbsession.query(models.MyModel)
-        one = query.filter(models.MyModel.name == 'one').first()
+        products = request.dbsession.query(models.Product).all()
     except DBAPIError:
         return Response(db_err_msg, content_type='text/plain', status=500)
-    return {'one': one, 'project': 'pyramidka_shop'}
+    return {'products': products, 'project': 'pyramidka_shop'}
 
 
 db_err_msg = """\
