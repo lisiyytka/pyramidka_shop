@@ -1,10 +1,16 @@
+{% extends "index.jinja2" %}
+
+{% block css %}<link rel="stylesheet" href="../static/css/offices.css">{% endblock css %}
+
 {% block content %}
-<div class="orders">
-    <h1>Наши магазины</h1>
-      {% for record in info %}
-        <h3>{{ record.name }}</h3>
-        <p>{{ record.adr }}</p>
-        <a href={{ record.link }}> смотреть на карте </a>
-      {% endfor %}
+<div class="offices">
+  <h2 class="offices__header">Наши магазины</h2>
+  {% for record in info %}
+  <div class="offices__office">
+    <h3>{{record.name}}</h3>
+    <p>{{record.adr}}</p>
+    <a href={{record.link}}> смотреть на карте </a>
+  </div>
+  {% endfor %}
 </div>
 {% endblock content %}

@@ -1,0 +1,25 @@
+.offices {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 100px;
+}
+
+.offices__header {
+  margin-bottom: 10px;
+}
+
+.offices__office {
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 1000px) {
+  .offices {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .offices {
+    width: 100%;
+  }
+}
