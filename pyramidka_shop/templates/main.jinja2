@@ -31,7 +31,7 @@
       <h2>Оформление заказа</h2>
       <p><input type="text" name="name" placeholder="Введите Ваше имя"></p>
       <p><input type="text" name="phone" placeholder="Введите Ваш номер телефона"></p>
-      <input type="submit" value="Заказать" onclick="checkInputs(event)">
+      <input type="submit" value="Заказать" onclick="validation(event)">
     </div>
   </form>
   <p class="product__invalid-data">Пожалуйста, введите Ваше имя и номер телефона!</p>
@@ -58,9 +58,9 @@
     });
   }
 
-  function checkInputs(e) {
+  function validation(e) {
     for (let i = 0; i < inputs.length; i++) {
-      if (inputs[i].value == "") {
+      if (inputs[i].value == "" || product.name  === undefined) {
         e.preventDefault();
         raiseError();
         break;
@@ -70,8 +70,8 @@
 
   function raiseError() {
     if (!errorRaised) {
-      invalidDataInfo.style.color = "rgb(226, 74, 74)";
-      invalidDataInfo.style.transition = "color .2s linear";
+      invalidDataInfo.style.opacity = "1";
+      invalidDataInfo.style.transition = "opacity .2s linear";
       errorRaised = true;
     } else {
       invalidDataInfo.style.transition = "font-size .2s linear";
@@ -83,8 +83,7 @@
   }
 
   function concealError() {
-    invalidDataInfo.style.color = "white";
-    invalidDataInfo.style.transition = "color .2s linear";
+    invalidDataInfo.style.opacity = "0";
     errorRaised = false;
   }
 </script>

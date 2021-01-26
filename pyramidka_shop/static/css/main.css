@@ -122,8 +122,10 @@
 }
 
 .product__invalid-data {
-  color: white;
+  opacity: 0;
+  cursor: default;
   font-size: 16px;
+  color: rgb(226, 74, 74);
   display: inline-block;
   width: 100%;
 }
