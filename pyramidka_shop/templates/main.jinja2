@@ -1,27 +1,91 @@
 {% extends "index.jinja2" %}
 
+{% block css %}
+<link rel="stylesheet" href="../static/css/main.css">{% endblock css %}
+
 {% block content %}
 <div class="product__wrapper">
+  <h2>Товары</h2>
   <form action="/result" method="POST">
-    {% for product in products %}
-    <div class="product__item">
-      <p class="product__name">{{product.name}}</p>
-      <div class="product__img"><img src="../static/img/{{product.image_src}}" width="100"></div>
-      <p class="product__price">Цена: {{product.price}} руб.</p>
-      {% if bin != None and product.name in bin.products %}
-        <button type="submit" class="product__btn_add" name="add" value="{{product.name}}" formaction="/" disabled>Добавить</button>
-        <button type="submit" class="product__btn_rm" name="remove" value="{{product.name}}" formaction="/" >Удалить</button>
-      {% else %}
-        <button type="submit" class="product__btn_add" name="add" value="{{product.name}}" formaction="/">Добавить</button>
-        <button type="submit" class="product__btn_rm" name="remove" value="{{product.name}}" formaction="/" disabled>Удалить</button>
-      {% endif %}
+    <div class="product__goods">
+      {% for product in products %}
+      <div class="product__item">
+        <p class="product__name">{{product.name}}</p>
+        <div class="product__img"><img src="../static/img/{{product.image_src}}" width="150"></div>
+        <p class="product__price">Цена: {{product.price}} руб.</p>
+        {% if bin != None and product.name in bin.products %}
+        <button type="submit" class="product__btn_add" name="add" value="{{product.name}}" formaction="/"
+          disabled>Добавить</button>
+        <button type="submit" class="product__btn_rm" name="remove" value="{{product.name}}"
+          formaction="/">Удалить</button>
+        {% else %}
+        <button type="submit" class="product__btn_add" name="add" value="{{product.name}}"
+          formaction="/">Добавить</button>
+        <button type="submit" class="product__btn_rm" name="remove" value="{{product.name}}" formaction="/"
+          disabled>Удалить</button>
+        {% endif %}
+      </div>
+      {% endfor %}
     </div>
-    {% endfor %}
-    <div class="delivery-info">
-        <p><input type="text" name="name" placeholder="Введите Ваше имя"></p>
-        <p><input type="text" name="phone" placeholder="Введите Ваш номер телефона"></p>
+    <div class="product__customer-info">
+      <h2>Оформление заказа</h2>
+      <p><input type="text" name="name" placeholder="Введите Ваше имя"></p>
+      <p><input type="text" name="phone" placeholder="Введите Ваш номер телефона"></p>
+      <input type="submit" value="Заказать" onclick="checkInputs(event)">
     </div>
-    <input type="submit" value="Заказать">
   </form>
+  <p class="product__invalid-data">Пожалуйста, введите Ваше имя и номер телефона!</p>
 </div>
 {% endblock content %}
+
+{% block js %}
+<script>
+  const inputs = document.querySelectorAll('input[type="text"]');
+  const invalidDataInfo = document.getElementsByClassName("product__invalid-data")[0];
+  const customerInfoBlock = document.getElementsByClassName("product__customer-info")[0];
+  let errorRaised = false;
+
+  for (let i = 0; i < inputs.length; i++) {
+    inputs[i].addEventListener('blur', () => {
+      if (inputs[i].value == "" && !errorRaised) {
+        raiseError();
+      }
+    });
+    inputs[i].addEventListener('focus', () => {
+      if (errorRaised) {
+        concealError();
+      }
+    });
+  }
+
+  function checkInputs(e) {
+    for (let i = 0; i < inputs.length; i++) {
+      if (inputs[i].value == "") {
+        e.preventDefault();
+        raiseError();
+        break;
+      }
+    }
+  }
+
+  function raiseError() {
+    if (!errorRaised) {
+      invalidDataInfo.style.color = "rgb(226, 74, 74)";
+      invalidDataInfo.style.transition = "color .2s linear";
+      errorRaised = true;
+    } else {
+      invalidDataInfo.style.transition = "font-size .2s linear";
+      invalidDataInfo.style.fontSize = "17px";
+      setTimeout(() => {
+        invalidDataInfo.style.fontSize = "16px";
+      }, 100) 
+    }
+  }
+
+  function concealError() {
+    invalidDataInfo.style.color = "white";
+    invalidDataInfo.style.transition = "color .2s linear";
+    errorRaised = false;
+  }
+</script>
+{% endblock js %}
